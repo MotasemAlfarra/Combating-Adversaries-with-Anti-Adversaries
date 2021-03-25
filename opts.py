@@ -1,12 +1,10 @@
 import os
 import os.path as osp
 from argparse import ArgumentParser
-from utils.utils import print_training_params
+from utils import print_training_params
 
 def parse_settings():
-    EXP_CHOICES = ['imagenet_snd','imagenet_nominal','local_trades','trades','awp','imagenet_pretraining', \
-                   'awp_cif100','hydra', 'rse', \
-                   'mart','ates','ates_cif100', 'imagenet_nominal_training']
+    EXP_CHOICES = ['awp','imagenet_pretraining']
     parser = ArgumentParser(description='PyTorch code for TAR: Test-time '
                             'Augmentation for Robustness')
     parser.add_argument('--experiment', type=str, default='trades', 
@@ -19,8 +17,6 @@ def parse_settings():
                         help='for deterministic behavior')
     parser.add_argument('--batch-size', type=int, default=250,
                         help='batch size')
-    parser.add_argument('--cheap', action='store_true', default=False,
-                        help='whether to use cheap attack (useful for debug)')
     parser.add_argument('--chunks', type=int, default=10, 
                         help='num of chunks in which to break the dataset')
     parser.add_argument('--num-chunk', type=int, default=None, 

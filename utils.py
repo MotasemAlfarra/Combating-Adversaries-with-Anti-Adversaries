@@ -64,7 +64,6 @@ def get_data_utils(dataset_name, batch_size, chunks, num_chunk):
             transforms.ToTensor()
         ])
         dataset = ImageFolder(path, transform)
-        print('Hi')
     else:
         dataset_fun = CIFAR10 if dataset_name == 'cifar10' else CIFAR100
         dataset = dataset_fun(root='./data', train=False, download=True,
@@ -107,20 +106,6 @@ def get_adversary(model, cheap, seed, eps):
     model.eval()
     adversary = AutoAttack(model.forward, norm='Linf', eps=eps, verbose=False)
     adversary.seed = seed
-    if cheap:
-        # print('Running CHEAP attack')
-        # based on
-        # https://github.com/fra31/auto-attack/blob/master/autoattack/autoattack.py#L230
-        # adversary.attacks_to_run = ['apgd-ce', 'apgd-t', 'fab-t', 'square']
-        adversary.attacks_to_run = ['apgd-ce', 'square']
-        adversary.apgd.n_iter = 2
-        adversary.apgd.n_restarts = 1
-        adversary.fab.n_restarts = 1
-        adversary.apgd_targeted.n_restarts = 1
-        adversary.fab.n_target_classes = 2
-        adversary.apgd_targeted.n_target_classes = 2
-        adversary.square.n_queries = 2
-
     return adversary
 
 def compute_advs(model, testloader, device, batch_size, cheap, seed, eps):
@@ -179,44 +164,12 @@ def print_training_params(args, txt_file_path):
 
 
 def get_model(experiment, k, alpha, dataset):
-    if experiment == 'local_trades':
-        from utils.resnet import ResNet18
-        model = ResNet18(num_classes=10)
-        state_dict = torch.load('./weights/local_trades_best.pth')['state_dict']
-        state_dict = { k.replace('model.' ,'') : v 
-            for k, v in state_dict.items() }
-        model.load_state_dict(state_dict, strict=False)
-    elif experiment in ['trades']:
-        from experiments.trades import get_model
-        model = get_model(experiment, k, alpha)
-    elif experiment == 'awp': # Adversarial Weight Perturbation
+    if experiment == 'awp': # Adversarial Weight Perturbation
         from experiments.adv_weight_pert import get_model
-        model = get_model(k, alpha)
-    elif experiment == 'awp_cif100': # Adversarial Weight Perturbation for CIFAR100
-        from experiments.adv_weight_pert_cif100 import get_model
         model = get_model(k, alpha)
     elif experiment == 'imagenet_pretraining': # ImageNet preatraining
         from experiments.imagenet_pretraining import get_imagenet_pretrained_model
         model = get_imagenet_pretrained_model(k, alpha, dataset)
-    elif experiment == 'hydra': # HYDRA
-        from experiments.hydra import get_model
-        model = get_model(k, alpha)
-    elif experiment == 'mart': # MART
-        from experiments.mart import get_model
-        model = get_model(k, alpha)
-    elif experiment in ['ates', 'ates_cif100']: # Adversarial Training with Early Stopping
-        from experiments.ates import get_model
-        model = get_model(experiment, k, alpha)
-    elif experiment == 'imagenet_nominal':
-        weights = resnet50(pretrained=True)
-        model = anti_adversary_wrapper(weights, mean=[0.485, 0.456, 0.406],
-                                 std=[0.229, 0.224, 0.225], k=k, alpha=alpha)
-    elif experiment == 'imagenet_snd':
-        from experiments.imagenet_resnet50 import get_model
-        model = get_model()
-    elif experiment == 'rse': # RSE
-        from experiments.rse import get_model
-        model = get_model(k, alpha)
     model.to("cuda")
     return model
 

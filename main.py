@@ -6,7 +6,7 @@ import numpy as np
 import os.path as osp
 import torch.backends.cudnn as cudnn
 
-from utils.utils import (get_model, print_to_log, eval_chunk,
+from utils import (get_model, print_to_log, eval_chunk,
                          eval_files)
 
 # For deterministic behavior
@@ -46,7 +46,7 @@ def main(args):
         sys.exit()
 
 if __name__ == "__main__":
-    from utils.opts import parse_settings
+    from opts import parse_settings
     args = parse_settings()
     if args.eval_files:
         from glob import glob
