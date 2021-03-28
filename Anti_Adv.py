@@ -1,3 +1,7 @@
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+
 class anti_adversary_wrapper(nn.Module):
     def __init__(self, model, mean=None, std=None, k=0, alpha=1):
         super(anti_adversary_wrapper, self).__init__()
