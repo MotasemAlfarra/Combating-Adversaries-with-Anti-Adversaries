@@ -92,7 +92,6 @@ class WideResNet(nn.Module):
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 def get_model(k, alpha):
-    # https://github.com/yaodongyu/TRADES/blob/master/evaluate_attack_cifar10.py#L104
     WEIGHTS_PATH = './weights/newmodel1_RST-AWP_cifar10_linf_wrn28-10.pt'
     model = WideResNet(depth=28, num_classes=10, widen_factor=10)
     # load weights
