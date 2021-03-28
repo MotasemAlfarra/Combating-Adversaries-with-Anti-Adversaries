@@ -31,8 +31,6 @@ def parse_settings():
                         help='number of iterations for generating anti adversary')
     parser.add_argument('--alpha', type=float, default=0.15,
                         help='learning rate for generating the anti adversary')
-    parser.add_argument('--max-queries', type=int, default=0, 
-                        help='number of queries allowed for black box attacks')
     args = parser.parse_args()
 
 
