@@ -4,6 +4,7 @@ This is the official repor for the work: "Combating Adversaries with Anti-Advers
 
 preprint: https://arxiv.org/pdf/2103.14347.pdf
 
+![plot](./pull.png)
 
 ## Environment Installations:
 First, you need to install the environment from the provided yml file by running:
