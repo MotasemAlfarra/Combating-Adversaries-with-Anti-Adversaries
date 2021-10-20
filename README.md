@@ -54,3 +54,4 @@ If you find our work useful, please consider citing it as
       primaryClass={cs.LG}
 }
 ```
+This project is licensed under the terms of the MIT license.
