@@ -43,7 +43,6 @@ Simply use the wrapper in `Anti_Adv.py`. The wrapper takes the following argumen
 
 ## Citation
 
-## Citation
 If you find our work useful, please consider citing it as
 ```bash
 @misc{alfarra2021combating,
