@@ -40,3 +40,18 @@ Simply use the wrapper in `Anti_Adv.py`. The wrapper takes the following argumen
 `k`: a scalar representing the number of iterations used to compte the anti-adversary.
 
 `alpha:` a scalar representing the learning rate used to compute the anti-adversary.
+
+## Citation
+
+## Citation
+If you find our work useful, please consider citing it as
+```bash
+@misc{alfarra2021combating,
+      title={Combating Adversaries with Anti-Adversaries}, 
+      author={Motasem Alfarra and Juan C. Pérez and Ali Thabet and Adel Bibi and Philip H. S. Torr and Bernard Ghanem},
+      year={2021},
+      eprint={2103.14347},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
