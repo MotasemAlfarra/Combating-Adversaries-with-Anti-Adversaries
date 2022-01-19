@@ -2,6 +2,8 @@
 
 This is the official repor for the work: "Combating Adversaries with Anti-Adversaries"
 
+This work is accepted to AAAI Conference on Artificial Intelligence (AAAI'22).
+
 preprint: https://arxiv.org/pdf/2103.14347.pdf
 
 ![plot](./pull.png)
